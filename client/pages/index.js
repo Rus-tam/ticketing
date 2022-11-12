@@ -1,7 +1,7 @@
-const app = () => {
+const index = () => {
     return (
         <h1>Application</h1>
     )
 }
 
-export default app;
+export default index;
