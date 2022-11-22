@@ -1,20 +1,18 @@
 import axios from "axios";
 
-const index = ({ currentUser }) => {
+const LandingPage = ({ currentUser }) => {
   console.log("Current User ", currentUser);
   return <h1>Landing page</h1>;
 };
 
-index.getInitialProps = async () => {
+LandingPage.getInitialProps = async ({ req }) => {
   if (typeof window === "undefined") {
     // we are on the server!
     // requests should be made to http://ingress-nginx.ingres
     const { data } = await axios.get(
       "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/users/currentuser",
       {
-        headers: {
-          Host: "ticketing.dev",
-        },
+        headers: req.headers,
       }
     );
 
@@ -28,4 +26,4 @@ index.getInitialProps = async () => {
   }
 };
 
-export default index;
+export default LandingPage;
